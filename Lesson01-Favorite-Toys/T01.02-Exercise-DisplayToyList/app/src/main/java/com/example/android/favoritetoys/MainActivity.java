@@ -16,8 +16,6 @@
 package com.example.android.favoritetoys;
 
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
