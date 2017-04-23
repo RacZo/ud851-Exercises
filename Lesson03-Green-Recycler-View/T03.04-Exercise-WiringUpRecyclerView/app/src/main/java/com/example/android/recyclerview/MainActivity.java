@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mNumbersList = (RecyclerView) findViewById(R.id.rv_numbers);
         mNumbersList.setLayoutManager(new LinearLayoutManager(this));
         mNumbersList.setHasFixedSize(true);
-        mNumbersList.setAdapter(new GreenAdapter(NUM_LIST_ITEMS));
+        mAdapter = new GreenAdapter(NUM_LIST_ITEMS);
+        mNumbersList.setAdapter(mAdapter);
     }
 }
