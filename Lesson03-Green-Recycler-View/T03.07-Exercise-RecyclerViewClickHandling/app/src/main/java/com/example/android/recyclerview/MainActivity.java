@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         /*
          * The GreenAdapter is responsible for displaying each item in the list.
          */
-        mAdapter = new GreenAdapter(NUM_LIST_ITEMS);
+        mAdapter = new GreenAdapter(NUM_LIST_ITEMS, );
         mNumbersList.setAdapter(mAdapter);
     }
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
              */
             case R.id.action_refresh:
                 // TODO (14) Pass in this as the ListItemClickListener to the GreenAdapter constructor
-                mAdapter = new GreenAdapter(NUM_LIST_ITEMS);
+                mAdapter = new GreenAdapter(NUM_LIST_ITEMS, );
                 mNumbersList.setAdapter(mAdapter);
                 return true;
         }
