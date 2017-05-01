@@ -21,9 +21,10 @@ import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String chooserTitle = "Pick an App...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +81,16 @@ public class MainActivity extends AppCompatActivity {
      * @see <http://developer.android.com/guide/components/intents-common.html/>
      */
     public void createYourOwn(View v) {
-        Toast.makeText(this,
-                "TODO: Create Your Own Implicit Intent",
-                Toast.LENGTH_SHORT)
-                .show();
+        String emailSubject = "Hey Handsome Developer!";
+        String emailBody = "Hello World!";
+        String mimeType = "message/rfc822";
+        ShareCompat.IntentBuilder.from(this)
+                .setChooserTitle(chooserTitle)
+                .setType(mimeType)
+                .setSubject(emailSubject)
+                .setHtmlText(emailBody)
+                .setEmailTo(new String[]{"info@oscarsalguero.com"})
+                .startChooser();
     }
 
     /**
@@ -143,9 +150,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void shareText(String text) {
         String mimeType = "text/plain";
-        String title = "Pick a way to share...";
         ShareCompat.IntentBuilder.from(this)
-                .setChooserTitle(title)
+                .setChooserTitle(chooserTitle)
                 .setType(mimeType)
                 .setText(text).startChooser();
     }
