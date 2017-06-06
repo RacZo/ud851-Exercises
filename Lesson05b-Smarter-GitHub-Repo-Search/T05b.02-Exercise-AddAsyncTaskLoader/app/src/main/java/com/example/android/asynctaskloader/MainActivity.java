@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /* A constant to save and restore the URL that is being displayed */
     private static final String SEARCH_QUERY_URL_EXTRA = "query";
 
-    // TODO (28) Remove the key for storing the search results JSON
-    /* A constant to save and restore the JSON that is being displayed */
-    private static final String SEARCH_RESULTS_RAW_JSON = "results";
-
     private static final int GITHUB_SEARCH_LOADER = 100;
 
     private EditText mSearchBoxEditText;
@@ -69,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (savedInstanceState != null) {
             String queryUrl = savedInstanceState.getString(SEARCH_QUERY_URL_EXTRA);
+            mUrlDisplayTextView.setText(queryUrl);
         }
-
-        // TODO (24) Initialize the loader with GITHUB_SEARCH_LOADER as the ID, null for the bundle, and this for the context
+        getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER, null, this);
     }
 
     /**
@@ -82,7 +78,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void makeGithubSearchQuery() {
         String githubQuery = mSearchBoxEditText.getText().toString();
 
-        // TODO (17) If no search was entered, indicate that there isn't anything to search for and return
+        if (TextUtils.isEmpty(githubQuery)) {
+            mUrlDisplayTextView.setText("No query entered, nothing to search.");
+            return;
+        }
 
         URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
         mUrlDisplayTextView.setText(githubSearchUrl.toString());
@@ -139,8 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     return;
                 }
                 mLoadingIndicator.setVisibility(View.VISIBLE);
-                // Within onStartLoading
-                // TODO (8) Force a load
+                forceLoad();
             }
 
             @Override
@@ -165,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<String> loader, String data) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (data != null && !data.equals("")) {
-            showJsonDataView();
             mSearchResultsTextView.setText(data);
+            showJsonDataView();
         } else {
             showErrorMessage();
         }
