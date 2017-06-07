@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
                 String githubSearchResults = null;
                 try {
-                    githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchQueryUrlString);
+                    githubSearchResults = NetworkUtils.getResponseFromHttpUrl(new URL(searchQueryUrlString));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
