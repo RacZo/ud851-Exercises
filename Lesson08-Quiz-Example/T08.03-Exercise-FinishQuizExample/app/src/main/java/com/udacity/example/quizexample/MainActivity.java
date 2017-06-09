@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     // advance the app to the next word
     private final int STATE_SHOWN = 1;
 
+    private int mWordColumn;
+    private int mDefinitionColumn;
+
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -103,11 +106,9 @@ public class MainActivity extends AppCompatActivity {
         // If you reach the end of the list of words, you should start at the beginning again.
         if (mData != null) {
             if (mData.moveToNext()) {
-                int wordColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
-                int definitionColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
-                mWordTextView.setText(mData.getString(wordColumn));
+                mWordTextView.setText(mData.getString(mWordColumn));
                 mDefinitionTextView.setVisibility(View.GONE);
-                mDefinitionTextView.setText(mData.getString(definitionColumn));
+                mDefinitionTextView.setText(mData.getString(mDefinitionColumn));
             }else{
                 mData.moveToFirst();
             }
@@ -165,13 +166,17 @@ public class MainActivity extends AppCompatActivity {
 
             // TODO (2) Initialize anything that you need the cursor for, such as setting up
             // the screen with the first word and setting any other instance variables
-            int wordColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
-            int definitionColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+            mWordColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
+            mDefinitionColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+
+            /*
             while (mData.moveToNext()) {
                 String word = mData.getString(wordColumn);
                 String definition = mData.getString(definitionColumn);
                 Log.v(LOG_TAG, word + ": " + definition);
             }
+            */
+            nextWord();
         }
     }
 
