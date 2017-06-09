@@ -3,6 +3,7 @@
     package="com.udacity.example.quizexample">
 
     <!-- TODO (1) Add the correct permission to access the DroidTermsExample content provider -->
+    <uses-permission android:name="com.example.udacity.droidtermsexample.TERMS_READ"/>
     
     <application
         android:allowBackup="true"
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
