@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements
     private CustomCursorAdapter mAdapter;
     RecyclerView mRecyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements
          and uses callbacks to signal when a user is performing these actions.
          */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Here is where you'll implement swipe to delete
             }
+
         }).attachToRecyclerView(mRecyclerView);
 
         /*
